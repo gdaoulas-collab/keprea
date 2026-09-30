@@ -1,0 +1,185 @@
+{
+  "summary": {
+    "health_score": 53,
+    "business_type": "B2B agri-tech manufacturer (insect-based agricultural biosolutions)",
+    "top_findings": [
+      "Every page ships duplicate <title>/<meta description> tags (index.html not stripped by vite-react-ssg)",
+      "Live internal placeholder note visible on /qui-sommes-nous in all 5 languages",
+      "No canonical tags anywhere on the site, ahead of the vercel.app to keprea.com migration",
+      "Organization JSON-LD and OG images hardcode keprea.com while the live site is keprea.vercel.app",
+      "/solutions/boosters never uses the word 'biostimulant' despite targeting that keyword"
+    ],
+    "quick_wins": [
+      "Delete hardcoded title/meta from index.html",
+      "Remove team.photoNote placeholder string",
+      "Add /innovation to sitemap.xml",
+      "Change hero video preload=\"auto\" to \"metadata\" and re-encode 13MB video",
+      "Convert 2.49MB production PNG to WebP/AVIF"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 62,
+      "what_works": [
+        "True SSG - full content visible without JS execution",
+        "HTTPS/HSTS fully enforced",
+        "Clean kebab-case French URLs",
+        "Working 308 redirects for legacy alias routes",
+        "Real 404s, valid sitemap/robots.txt structure"
+      ],
+      "findings": [
+        {"title": "Duplicate title/meta tags on every page", "severity": "Critical", "description": "index.html hardcodes a generic title/description that survives alongside each page's correct per-page Head output on all 18 routes.", "recommendation": "Remove the hardcoded tags from index.html; rely exclusively on per-page Head components."},
+        {"title": "No canonical tags anywhere", "severity": "Critical", "description": "Zero link rel=canonical found on any of 9+ sampled pages, ahead of a pending domain migration and with legacy alias routes live.", "recommendation": "Add self-referencing canonical tags now; flip domain at keprea.com cutover."},
+        {"title": "Hero video eagerly preloaded", "severity": "High", "description": "13MB hero video uses preload=\"auto\", competing with critical CSS/JS/fonts for bandwidth on load.", "recommendation": "Switch to preload=\"metadata\" or lazy-trigger playback; re-encode to 2-3MB."},
+        {"title": "/innovation missing from sitemap", "severity": "High", "description": "Live, nav-linked page not included in sitemap.xml's 13 URLs.", "recommendation": "Add https://keprea.vercel.app/innovation to sitemap.xml."},
+        {"title": "Legacy duplicate routes depend entirely on redirect config", "severity": "High", "description": "App.tsx still registers 4 legacy routes as live React Router routes, masked only by vercel.json 308 redirects with no canonical-tag backstop.", "recommendation": "Remove redundant Route entries from App.tsx once canonical tags ship."},
+        {"title": "Missing security headers", "severity": "Medium", "description": "Only HSTS present; CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy all absent.", "recommendation": "Add a headers block to vercel.json."},
+        {"title": "Static OG/Twitter tags with no og:url", "severity": "Medium", "description": "Identical social card metadata across all 18 pages; no og:url at all.", "recommendation": "Move OG/Twitter tags into each page's Head block."},
+        {"title": "Legal pages have no page-specific Head override", "severity": "Medium", "description": "/mentions-legales relies entirely on the duplicate generic tags with no unique title.", "recommendation": "Add unique Head blocks to legal pages."}
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 46,
+      "what_works": [
+        "Transparent, non-fabricated handling of the missing-testimonials gap on the homepage",
+        "SIRET/address/email visible in footer",
+        "Strong FAQ/step-by-step structure on product pages (AI-citability bones)"
+      ],
+      "findings": [
+        {"title": "Live internal placeholder note on /qui-sommes-nous", "severity": "Critical", "description": "'Photo à faire ensemble le 15 OCT' rendered as a visible overlay on the team photo, in all 5 languages, on the live production site.", "recommendation": "Remove team.photoNote from Team.tsx and all 5 LanguageContext.tsx entries immediately."},
+        {"title": "Named individuals with unverifiable affiliation on Team page", "severity": "Critical", "description": "6 named people listed with only name + one-line role, no bios/credentials; some names plausibly correspond to known public figures.", "recommendation": "Verify accuracy and consent with each individual before further exposure; build real bios or remove unverified entries."},
+        {"title": "/ressources is functionally empty", "severity": "High", "description": "~169 words, all content cards marked 'coming soon'.", "recommendation": "Publish real content or noindex the page until ready."},
+        {"title": "/qui-sommes-nous and /notre-production well under word-count floor", "severity": "High", "description": "282 and 232 words respectively vs. a ~500-600 word floor for this page type.", "recommendation": "Expand with concrete milestones, certifications, production figures."},
+        {"title": "Product pages 30-45% under thin-content floor", "severity": "High", "description": "523-589 words vs. an 800-word service-page floor; confirms the open ERRORS.md thin-content item with hard numbers.", "recommendation": "Deepen existing FAQ/spec/compatibility sections rather than add new ones."},
+        {"title": "Repetitive boilerplate across product pages", "severity": "High", "description": "Near-verbatim CTA and cross-sell copy repeated across all 4 product pages.", "recommendation": "Rewrite connective/CTA sentences per page."},
+        {"title": "Unattributed statistics mixed with cited sources", "severity": "High", "description": "'Données internes' appears in the same source line as legitimate third-party citations (ITAB, IBMA), diluting credibility of both.", "recommendation": "Separate internal claims from third-party citations; add methodology notes."},
+        {"title": "No author/byline or last-updated date", "severity": "Medium", "description": "Pages making regulatory claims (Plan Ecophyto 2+, EU 2018/848) have no authorship or freshness signal.", "recommendation": "Add a byline block to regulatory/technical content pages."}
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 35,
+      "what_works": [
+        "Site-wide Organization JSON-LD present and structurally valid",
+        "No deprecated schema types found"
+      ],
+      "findings": [
+        {"title": "Organization schema domain mismatch", "severity": "Critical", "description": "url/logo point to keprea.com while the live site is keprea.vercel.app, with no canonical tag to reconcile it.", "recommendation": "Confirm canonical domain and align url/logo/OG images/canonical tags consistently."},
+        {"title": "No BreadcrumbList anywhere", "severity": "High", "description": "Clean URL hierarchy exists but has no breadcrumb markup on any inner page.", "recommendation": "Add BreadcrumbList to all inner pages."},
+        {"title": "No WebSite schema or sameAs enrichment", "severity": "Medium", "description": "Homepage lacks WebSite schema; Organization has no sameAs social links.", "recommendation": "Add WebSite schema and sameAs once verified profiles exist."},
+        {"title": "No product-level schema on solution pages", "severity": "Medium", "description": "4 solution pages have no Product/Service schema despite named products with composition data.", "recommendation": "Add Service schema (preferred) or factual-only Product schema with no offers/ratings."}
+      ]
+    },
+    {
+      "name": "Sitemap",
+      "score": 70,
+      "what_works": [
+        "Valid XML, all 13 URLs return 200 and match real routes",
+        "Legacy alias URLs correctly excluded, verified redirecting via 308"
+      ],
+      "findings": [
+        {"title": "/innovation missing from sitemap", "severity": "High", "description": "Live, nav-linked page not covered.", "recommendation": "Add to sitemap.xml."},
+        {"title": "robots.txt sitemap directive points to a domain not yet live", "severity": "Medium", "description": "Sitemap: https://keprea.com/sitemap.xml currently 404s; already a tracked pre-migration item.", "recommendation": "Resolve at keprea.com cutover."},
+        {"title": "priority/changefreq ignored by Google", "severity": "Low", "description": "Present on every URL but provides no ranking benefit.", "recommendation": "Safe to remove to simplify maintenance."}
+      ]
+    },
+    {
+      "name": "Performance",
+      "score": 55,
+      "what_works": [
+        "Excellent TTFB (~50ms), edge-cached static SSG HTML",
+        "CLS risk low - pre-sized containers throughout"
+      ],
+      "findings": [
+        {"title": "13MB hero video eagerly preloaded", "severity": "High", "description": "preload=\"auto\" on a 13MB single-format MP4 competes with critical CSS/JS/fonts on initial load.", "recommendation": "Switch to preload=\"metadata\"; re-encode to 2-3MB."},
+        {"title": "2.49MB uncompressed PNG", "severity": "High", "description": "Production-section image served as PNG at full resolution despite rendering in a small fixed container.", "recommendation": "Convert to WebP/AVIF, compress to match rendered size."},
+        {"title": "Monolithic 722KB JS bundle", "severity": "Medium", "description": "No visible route-based code-splitting; same bundle loads on every page.", "recommendation": "Evaluate React.lazy/dynamic import for page-specific sections."},
+        {"title": "No CrUX/PSI field data obtained", "severity": "Info", "description": "PSI API was rate-limited this session; all performance figures are lab estimates.", "recommendation": "Re-run with GOOGLE_API_KEY configured for authoritative field data."}
+      ]
+    },
+    {
+      "name": "Visual / Mobile",
+      "score": 60,
+      "what_works": [
+        "No horizontal scroll or console errors across 6 page/viewport combinations",
+        "Single H1 confirmed on all pages, strong CTA contrast, no decorative emoji"
+      ],
+      "findings": [
+        {"title": "Contact form not visible above the fold on mobile", "severity": "High", "description": "At 375px, zero actionable element (no field, no submit CTA) is visible on the highest-intent page.", "recommendation": "Tighten vertical spacing above the form on mobile."},
+        {"title": "Cookie banner obscures content on mobile load", "severity": "Medium", "description": "Expected RGPD behavior but reduces effective above-fold area further.", "recommendation": "No change required to consent behavior; consider compact banner variant on mobile."},
+        {"title": "Touch targets under 48px", "severity": "Medium", "description": "Cookie banner, hamburger, and language switcher controls measure 36-46px.", "recommendation": "Increase to ~44-48px on mobile."}
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 62,
+      "what_works": [
+        "Fully server-rendered content, no JS-dependent SPA gap for AI crawlers",
+        "All major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot) verified allowed",
+        "Well-formed FAQ Q&A sections on 4 product pages in ideal citation format"
+      ],
+      "findings": [
+        {"title": "No FAQPage schema despite qualifying content", "severity": "High", "description": "4 product pages have genuine FAQ sections with no markup - highest-leverage single fix for AI/LLM citation.", "recommendation": "Add FAQPage schema (for AI citation value only, not Google SERP rich results, which were retired May 2026)."},
+        {"title": "llms.txt missing", "severity": "Medium", "description": "No llms.txt found at the root.", "recommendation": "Add at keprea.com launch, summarizing product lines and key URLs."},
+        {"title": "robots.txt sitemap directive 404s", "severity": "Medium", "description": "Points to keprea.com/sitemap.xml which isn't live yet.", "recommendation": "Fix at domain cutover."},
+        {"title": "Statistics lack source attribution", "severity": "Medium", "description": "Quotable stats (84% of crops, 5500 species, 400M years) have no linked academic/institutional source.", "recommendation": "Add source citations to increase LLM citation trust."}
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 65,
+      "what_works": [
+        "Descriptive alt text present across sampled pages"
+      ],
+      "findings": [
+        {"title": "Oversized production-section PNG", "severity": "High", "description": "2.49MB image served uncompressed at a small rendered size.", "recommendation": "Convert to WebP/AVIF."},
+        {"title": "Hero video not image-related but oversized asset class", "severity": "Info", "description": "See Performance category for the 13MB hero video finding.", "recommendation": "See Performance recommendations."}
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {"name": "Phase 1: Critical Fixes", "timeframe": "Week 1", "items": [
+        "Remove duplicate title/meta from index.html",
+        "Remove live team.photoNote placeholder",
+        "Verify named Team page individuals before further exposure",
+        "Add self-referencing canonical tags site-wide",
+        "Fix Organization JSON-LD domain mismatch",
+        "Add 'biostimulant' to /solutions/boosters title/H1/copy"
+      ]},
+      {"name": "Phase 2: High-Impact Improvements", "timeframe": "Weeks 2-3", "items": [
+        "Re-encode hero video and switch preload to metadata",
+        "Convert 2.49MB PNG to WebP/AVIF",
+        "Add /innovation to sitemap.xml; reconcile /innovation vs /#innovation",
+        "Add BreadcrumbList schema to all inner pages",
+        "Fix /contact mobile above-the-fold layout",
+        "De-duplicate meta descriptions across pages",
+        "Add per-page OG/Twitter tags with og:url",
+        "Add baseline security headers to vercel.json"
+      ]},
+      {"name": "Phase 3: Content & Authority", "timeframe": "Month 2", "items": [
+        "Expand /pourquoi-le-biocontrole to 1000+ words with sourced stats and Article/FAQPage schema",
+        "Deepen 4 product pages toward 800 words; de-duplicate boilerplate copy",
+        "Deepen /qui-sommes-nous and /notre-production toward 500-600 words",
+        "Separate internal vs third-party stat sourcing",
+        "Add FAQPage schema to product pages",
+        "Add Service/factual-only Product schema to solution pages",
+        "Publish real content on /ressources or noindex it",
+        "Add author/byline and last-updated signals"
+      ]},
+      {"name": "Phase 4: Monitoring & Iteration", "timeframe": "Ongoing", "items": [
+        "Re-run CWV measurement with GOOGLE_API_KEY configured",
+        "At keprea.com cutover: regenerate sitemap, fix robots.txt sitemap directive, remove legacy Route duplicates, add llms.txt",
+        "Add real farmer testimonials as they become available",
+        "Add source attribution to key on-site statistics",
+        "Monitor Search Console title/description rewrite rates post-fix"
+      ]}
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

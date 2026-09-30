@@ -1,75 +1,125 @@
+import type { RefObject } from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
-import biocontrolInfographic from "@/assets/biocontrol-vivant-infographic.png";
-import biocontrolInfographicEs from "@/assets/biocontrol-vivant-infographic-es.png";
-import biocontrolInfographicEn from "@/assets/biocontrol-vivant-infographic-en.png";
-import biocontrolInfographicPt from "@/assets/biocontrol-vivant-infographic-pt.png";
-import biocontrolInfographicDe from "@/assets/biocontrol-vivant-infographic-de.png";
-import extraitsInfographic from "@/assets/substances-insectes-benefits.png";
-import extraitsInfographicEs from "@/assets/substances-insectes-benefits-es.png";
-import extraitsInfographicEn from "@/assets/substances-insectes-benefits-en.png";
-import extraitsInfographicPt from "@/assets/substances-insectes-benefits-pt.png";
-import extraitsInfographicDe from "@/assets/substances-insectes-benefits-de.png";
+import { useInView } from "@/hooks/useInView";
+import PremiumCard from "./PremiumCard";
 
 const Innovation = () => {
-  const { t, language } = useLanguage();
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [isFlippedBee, setIsFlippedBee] = useState(false);
+  const { t } = useLanguage();
+  const { ref: headerRef, inView: headerVisible } = useInView();
+  const { ref: bodyRef, inView: bodyVisible } = useInView(0.04);
 
-  const currentExtraitsInfographic = language === 'es' ? extraitsInfographicEs : language === 'en' ? extraitsInfographicEn : language === 'pt' ? extraitsInfographicPt : language === 'de' ? extraitsInfographicDe : extraitsInfographic;
-  const currentBiocontrolInfographic = language === 'es' ? biocontrolInfographicEs : language === 'en' ? biocontrolInfographicEn : language === 'pt' ? biocontrolInfographicPt : language === 'de' ? biocontrolInfographicDe : biocontrolInfographic;
+  const extraitsBenefits = [
+    t("innovation.infographic.substances.benefit1"),
+    t("innovation.infographic.substances.benefit2"),
+    t("innovation.infographic.substances.benefit3"),
+  ];
+
+  const biocontrolStats = [
+    { value: t("innovation.infographic.biocontrol.stat1.value"), label: t("innovation.infographic.biocontrol.stat1.label") },
+    { value: t("innovation.infographic.biocontrol.stat2.value"), label: t("innovation.infographic.biocontrol.stat2.label") },
+  ];
 
   return (
-    <section id="innovation" className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
+    <section id="innovation" className="py-28 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="container mx-auto">
-        <div className="mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"></div>
+
+        {/* Section header */}
+        <div
+          ref={headerRef as RefObject<HTMLDivElement>}
+          className={`mb-12 max-w-2xl reveal${headerVisible ? " is-visible" : ""}`}
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-3">
+            {t("innovation.eyebrow")}
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            {t("innovation.heading")}
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            {t("innovation.intro")}
+          </p>
+          <Link
+            to="/pourquoi-le-biocontrole"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:opacity-80 transition-opacity mt-4 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            {t("innovation.link")}
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-6">
-            <div className="bg-card rounded-xl shadow-sm aspect-square flex flex-col justify-center relative overflow-hidden">
-              <div className="absolute inset-0 rounded-xl overflow-hidden" style={{ perspective: '1000px' }}>
-                <div className="relative w-full h-full cursor-pointer transition-transform duration-700 ease-in-out" onClick={() => setIsFlipped(!isFlipped)} style={{ transformStyle: 'preserve-3d', transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}>
-                  <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}>
-                    <video src="/substances-video.mp4" autoPlay loop muted playsInline poster="/lovable-uploads/5a41caf6-fec0-40ca-984c-f9543cae5d7e.png" className="w-full h-full object-cover" style={{ objectPosition: 'center 30%', filter: 'brightness(1.2) contrast(1.1)' }} />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-6">
-                      <h3 className="text-xl font-bold text-white text-center transition-transform duration-300 hover:scale-110 cursor-pointer">{t('innovation.substances.question')}</h3>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-                    <img 
-                      src={currentExtraitsInfographic} 
-                      alt="Extraits d'insectes infographic"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Two-column layout */}
+        <div
+          ref={bodyRef as RefObject<HTMLDivElement>}
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-5 reveal reveal-delay-1${bodyVisible ? " is-visible" : ""}`}
+        >
 
-          <div className="space-y-6">
-            <div className="bg-card rounded-xl shadow-sm aspect-square flex flex-col justify-center relative overflow-hidden">
-              <div className="absolute inset-0 rounded-xl overflow-hidden" style={{ perspective: '1000px' }}>
-                <div className="relative w-full h-full cursor-pointer transition-transform duration-700 ease-in-out" onClick={() => setIsFlippedBee(!isFlippedBee)} style={{ transformStyle: 'preserve-3d', transform: isFlippedBee ? 'rotateY(180deg)' : 'rotateY(0deg)' }}>
-                  <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}>
-                    <video src="/biocontrol-video.mp4" autoPlay loop muted playsInline poster="/lovable-uploads/bf0fefed-2323-4a06-a4f9-b4681de73dfe.png" className="w-full h-full object-cover" style={{ objectPosition: 'center 30%', filter: 'brightness(1.2) contrast(1.1)' }} />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-6">
-                      <h3 className="text-xl font-bold text-white text-center transition-transform duration-300 hover:scale-110 cursor-pointer">{t('innovation.biocontrol.question')}</h3>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-                    <img 
-                      src={currentBiocontrolInfographic} 
-                      alt="Biocontrôle vivant infographic"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* ── Carte 1 : Extraits d'insectes (claire) ── */}
+          <PremiumCard className="px-8 py-9">
+            {/* Eyebrow */}
+            <span
+              className="inline-flex items-center rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-semibold text-primary mb-5"
+              style={{ background: 'hsl(var(--primary)/0.08)', border: '1px solid hsl(var(--primary)/0.18)' }}
+            >
+              {t("innovation.card1.eyebrow")}
+            </span>
+
+            <h3 className="text-lg font-bold text-foreground mb-8 leading-snug max-w-[30ch]"
+              style={{ letterSpacing: '-0.01em' }}>
+              {t("innovation.substances.question")}
+            </h3>
+
+            <ul className="flex flex-col gap-0 divide-y" style={{ borderColor: 'hsl(var(--border)/0.5)' }} role="list">
+              {extraitsBenefits.map((benefit, i) => (
+                <li key={i} className="flex gap-5 items-start py-5 first:pt-0 last:pb-0">
+                  <span
+                    className="text-3xl font-extrabold tabular-nums shrink-0 leading-none w-10"
+                    style={{ color: 'hsl(var(--primary))' }}
+                    aria-hidden="true"
+                  >
+                    0{i + 1}
+                  </span>
+                  <p className="text-sm leading-relaxed" style={{ color: 'hsl(var(--foreground)/0.78)' }}>
+                    {benefit}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </PremiumCard>
+
+          {/* ── Carte 2 : Biocontrôle vivant (claire) ── */}
+          <PremiumCard className="px-8 py-9">
+            {/* Eyebrow */}
+            <span
+              className="inline-flex items-center rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-semibold text-primary mb-5"
+              style={{ background: 'hsl(var(--primary)/0.08)', border: '1px solid hsl(var(--primary)/0.18)' }}
+            >
+              {t("innovation.card2.eyebrow")}
+            </span>
+
+            <h3
+              className="text-lg font-bold text-foreground mb-8 leading-snug max-w-[30ch]"
+              style={{ letterSpacing: '-0.01em' }}
+            >
+              {t("innovation.biocontrol.question")}
+            </h3>
+
+            <ul className="flex flex-col gap-0 divide-y" style={{ borderColor: 'hsl(var(--border)/0.5)' }} role="list">
+              {biocontrolStats.map((stat, i) => (
+                <li key={i} className="flex gap-5 items-start py-5 first:pt-0 last:pb-0">
+                  <span
+                    className="text-3xl font-extrabold tabular-nums shrink-0 leading-none min-w-10"
+                    style={{ color: 'hsl(var(--primary))' }}
+                  >
+                    {stat.value}
+                  </span>
+                  <p className="text-sm leading-relaxed" style={{ color: 'hsl(var(--foreground)/0.78)' }}>
+                    {stat.label}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </PremiumCard>
+
         </div>
       </div>
     </section>

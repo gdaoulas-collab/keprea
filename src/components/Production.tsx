@@ -1,263 +1,143 @@
-import { MapPin, Factory, Leaf, ArrowDown, ArrowRight, Bug, Archive, FlaskConical, Package, Truck, Users } from "lucide-react";
+import type { RefObject } from "react";
+import { MapPin, Factory, Leaf, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import FranceMap from "./FranceMap";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useInView } from "@/hooks/useInView";
 
-const Production = () => {
+interface ProductionProps {
+  teaser?: boolean;
+}
+
+const Production = ({ teaser = false }: ProductionProps) => {
   const { t } = useLanguage();
+  const { ref: headerRef, inView: headerVisible } = useInView();
+  const { ref: bodyRef, inView: bodyVisible } = useInView(0.04);
+  const { ref: siteRef, inView: siteVisible } = useInView(0.1);
 
   return (
     <section id="production" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/50">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            {t('production.title')}
+
+        {/* Header */}
+        <div
+          ref={headerRef as RefObject<HTMLDivElement>}
+          className={`mb-12 reveal${headerVisible ? " is-visible" : ""}`}
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-3">
+            {t("production.eyebrow")}
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            {t("production.title")}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            {t('production.subtitle')}
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+            {t("production.subtitle")}
           </p>
         </div>
 
         <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/10 to-accent/20 p-8 lg:p-12">
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              {/* Colonne de gauche - Texte excellence */}
-              <div className="lg:col-span-4">
+          <div
+            ref={bodyRef as RefObject<HTMLDivElement>}
+            className={`relative overflow-hidden rounded-2xl p-8 lg:p-12 reveal reveal-delay-1${bodyVisible ? " is-visible" : ""}`}
+            style={{ background: 'hsl(var(--primary) / 0.12)' }}
+          >
+            <div className={`relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8${teaser ? " items-center" : ""}`}>
+
+              {/* Left — feature pillars */}
+              <div className="lg:col-span-3">
                 <h3 className="text-2xl font-bold mb-6 text-foreground">
-                  {t('production.excellence')}
+                  {t("production.excellence")}
                 </h3>
-                
+
                 <div className="space-y-8">
-                  <div className="flex items-start gap-6">
-                    <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-8 h-8 text-primary" />
+                  {[
+                    { Icon: MapPin, titleKey: "production.location.title", descKey: "production.location.desc" },
+                    { Icon: Factory, titleKey: "production.technology.title", descKey: "production.technology.desc" },
+                    { Icon: Leaf, titleKey: "production.environment.title", descKey: "production.environment.desc" },
+                  ].map(({ Icon, titleKey, descKey }) => (
+                    <div key={titleKey} className="flex items-start gap-5">
+                      <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
+                        <Icon className="w-6 h-6 text-primary" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-1 text-base">
+                          {t(titleKey)}
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {t(descKey)}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-2 text-lg">{t('production.location.title')}</h4>
-                      <p className="text-muted-foreground">
-                        {t('production.location.desc')}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-6">
-                    <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <Factory className="w-8 h-8 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-2 text-lg">{t('production.technology.title')}</h4>
-                      <p className="text-muted-foreground">
-                        {t('production.technology.desc')}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-6">
-                    <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <Leaf className="w-8 h-8 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-foreground mb-2 text-lg">{t('production.environment.title')}</h4>
-                      <p className="text-muted-foreground">
-                        {t('production.environment.desc')}
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Colonne du milieu - Image du bâtiment */}
-              <div className="lg:col-span-4">
-                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-primary/5 border-2 border-primary/20">
-                  <img src="/lovable-uploads/6f3f0723-78e2-48e6-b36a-2520e97f1f40.png" alt="Site de production Keprea à Damparis" className="w-full h-full object-cover" />
-                </div>
-              </div>
+              {teaser ? (
+                <>
+                  {/* Centre — building photo */}
+                  <div className="lg:col-span-5">
+                    <div className="aspect-[16/11] rounded-xl overflow-hidden border-2 border-primary/20">
+                      <img
+                        src="/lovable-uploads/6f3f0723-78e2-48e6-b36a-2520e97f1f40.webp"
+                        alt={t("alt.productionSite")}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
 
-              {/* Colonne de droite - Carte */}
-              <div className="lg:col-span-4">
-                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-primary/5 border-2 border-primary/20">
-                  <FranceMap />
+                  {/* Right — CTA */}
+                  <div className="lg:col-span-4">
+                    <div className="flex flex-col justify-between h-full gap-6 p-6 rounded-xl border border-primary/15 bg-background/80">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3">
+                          {t("production.teaser.label")}
+                        </p>
+                        <p className="text-base font-semibold text-foreground leading-snug mb-2">
+                          {t("production.teaser.title")}
+                        </p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {t("production.teaser.desc")}
+                        </p>
+                      </div>
+                      <Link
+                        to="/notre-production"
+                        className="group inline-flex items-center gap-3 rounded-full bg-primary hover:bg-primary/90 text-white pl-5 pr-2 py-2 font-semibold text-sm transition-all duration-300 w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                      >
+                        {t("production.teaser.link")}
+                        <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center group-hover:translate-x-0.5 transition-transform duration-300">
+                          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                /* Right — site photo + map, page dédiée seulement */
+                <div
+                  ref={siteRef as RefObject<HTMLDivElement>}
+                  className={`lg:col-span-9 grid sm:grid-cols-[1.5fr_1fr] gap-5 reveal reveal-delay-1${siteVisible ? " is-visible" : ""}`}
+                >
+                  <div className="aspect-[16/10] sm:aspect-auto sm:h-full rounded-2xl overflow-hidden border-2 border-primary/20">
+                    <img
+                      src="/lovable-uploads/6f3f0723-78e2-48e6-b36a-2520e97f1f40.webp"
+                      alt={t("alt.productionSite")}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <div className="aspect-[4/3] sm:flex-1 rounded-2xl overflow-hidden border-2 border-primary/20">
+                      <FranceMap />
+                    </div>
+                    <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <MapPin className="w-3.5 h-3.5 text-primary shrink-0" aria-hidden="true" />
+                      {t("production.site.mapCaption")}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
-
-            {/* Processus de production en bas - Responsive */}
-            <div className="relative z-10 mt-8">
-              <h4 className="text-lg font-semibold text-primary mb-6 text-center">{t('production.process.title')}</h4>
-              
-              {/* Version mobile - Format vertical avec convergence */}
-              <div className="block lg:hidden">
-                <div className="flex flex-col items-center gap-4 max-w-sm mx-auto">
-                  
-                  {/* Première section - Élevage et Collecte côte à côte */}
-                  <div className="flex justify-center gap-4 w-full">
-                    {/* Étape 1: Élevage d'insecte auxiliaire */}
-                    <div className="flex flex-col items-center gap-3 p-3 bg-background/50 rounded-lg text-center flex-1 max-w-[140px]">
-                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Bug className="w-6 h-6 text-purple-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-foreground">{t('production.process.step1')}</p>
-                      </div>
-                    </div>
-                    
-                    {/* Étape 2: Collecte */}
-                    <div className="flex flex-col items-center gap-3 p-3 bg-background/50 rounded-lg text-center flex-1 max-w-[140px]">
-                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Archive className="w-6 h-6 text-orange-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-foreground">{t('production.process.step2')}</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Flèches de convergence */}
-                  <div className="flex justify-center gap-4">
-                    <ArrowDown className="w-5 h-5 text-primary" />
-                    <ArrowDown className="w-5 h-5 text-primary" />
-                  </div>
-
-                  {/* Étape 3: Transformation */}
-                  <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-full">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <FlaskConical className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-foreground">{t('production.process.step3')}</p>
-                    </div>
-                  </div>
-
-                  <ArrowDown className="w-6 h-6 text-primary" />
-
-                  {/* Étape 4: Packaging */}
-                  <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-full">
-                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Package className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-foreground">{t('production.process.step4')}</p>
-                    </div>
-                  </div>
-
-                  <ArrowDown className="w-6 h-6 text-primary" />
-
-                  {/* Étape 5: Transport */}
-                  <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-full">
-                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Truck className="w-6 h-6 text-red-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-foreground">{t('production.process.transport')}</p>
-                    </div>
-                  </div>
-
-                  <ArrowDown className="w-6 h-6 text-primary" />
-
-                  {/* Étape 6: Conseil d'utilisation en plein champ */}
-                  <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-full">
-                    <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Users className="w-6 h-6 text-yellow-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-foreground">{t('production.process.step5')}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Version desktop - Format horizontal avec scroll */}
-              <div className="hidden lg:block">
-                <div className="overflow-x-auto">
-                  <div className="flex items-center justify-center gap-6 min-w-max px-4">
-                    
-                    {/* Première section - Élevage et Collecte avec convergence */}
-                    <div className="flex flex-col items-center gap-4">
-                      {/* Les deux étapes initiales */}
-                      <div className="flex flex-col gap-4">
-                        {/* Étape 1: Élevage d'insecte auxiliaire */}
-                        <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-40">
-                          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <Bug className="w-6 h-6 text-purple-600" />
-                          </div>
-                          <div>
-                            <p className="text-xs font-bold text-foreground">{t('production.process.step1')}</p>
-                          </div>
-                        </div>
-                        
-                        {/* Étape 2: Collecte */}
-                        <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-40">
-                          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <Archive className="w-6 h-6 text-orange-600" />
-                          </div>
-                          <div>
-                            <p className="text-xs font-bold text-foreground">{t('production.process.step2')}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Flèches convergentes */}
-                    <div className="flex flex-col items-center gap-2">
-                      <ArrowRight className="w-6 h-6 text-primary" />
-                      <ArrowRight className="w-6 h-6 text-primary" />
-                    </div>
-
-                    {/* Étape 3: Transformation */}
-                    <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-40">
-                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <FlaskConical className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-foreground">{t('production.process.step3')}</p>
-                      </div>
-                    </div>
-
-                    {/* Flèche vers packaging */}
-                    <ArrowRight className="w-6 h-6 text-primary" />
-
-                    {/* Étape 4: Packaging */}
-                    <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-40">
-                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Package className="w-6 h-6 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-foreground">{t('production.process.step4')}</p>
-                      </div>
-                    </div>
-
-                    {/* Flèche vers export */}
-                    <ArrowRight className="w-6 h-6 text-primary" />
-
-                    {/* Étape 5: Export */}
-                    <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-40">
-                      <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Truck className="w-6 h-6 text-red-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-foreground">{t('production.process.transport')}</p>
-                      </div>
-                    </div>
-
-                    {/* Flèche vers conseil */}
-                    <ArrowRight className="w-6 h-6 text-primary" />
-
-                    {/* Étape 6: Conseil d'utilisation en plein champ */}
-                    <div className="flex flex-col items-center gap-3 p-4 bg-background/50 rounded-lg text-center w-40">
-                      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Users className="w-6 h-6 text-yellow-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-foreground">{t('production.process.step5')}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Background gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent"></div>
           </div>
         </div>
       </div>

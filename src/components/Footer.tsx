@@ -1,81 +1,98 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-muted/40 border-t border-border mt-auto">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <footer className="relative bg-muted/40 mt-auto">
+      <div
+        className="h-px w-full"
+        style={{ background: "linear-gradient(90deg, transparent, hsl(var(--primary)/0.4), transparent)" }}
+        aria-hidden="true"
+      />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
 
           {/* Identité */}
           <div>
             <img
               src="/lovable-uploads/eprea_Main_Logo.png"
-              alt="Keprea — Biosolutions Agricoles"
-              className="h-12 w-auto mb-4"
+              alt={t("alt.kepreaFooterLogo")}
+              className="h-14 w-auto mb-4"
             />
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Biosolutions à base d'insectes pour une agriculture performante et régénérative.
+              {t("footer.tagline")}
             </p>
-            <p className="text-sm text-muted-foreground mt-2">Dole (39100) — Jura, France</p>
+            <p className="text-sm text-muted-foreground mt-2">{t("footer.location")}</p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Navigation</h3>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-[0.2em] mb-5">{t("footer.nav.title")}</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/#solutions" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Nos solutions
-                </a>
+                <Link to="/solutions" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.nav.solutions")}
+                </Link>
               </li>
               <li>
-                <a href="/#innovation" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Innovation
-                </a>
+                <Link to="/innovation" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("nav.innovation")}
+                </Link>
               </li>
               <li>
-                <a href="/#production" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Notre production
-                </a>
+                <Link to="/notre-production" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.nav.production")}
+                </Link>
               </li>
               <li>
-                <a href="/#about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  À propos
-                </a>
+                <Link to="/qui-sommes-nous" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.nav.about")}
+                </Link>
               </li>
               <li>
-                <a href="/#contact-form" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </a>
+                <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.nav.contact")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/ressources" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.nav.ressources")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/pourquoi-le-biocontrole" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.nav.whyBiocontrol")}
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Contact & légal */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Contact</h3>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-[0.2em] mb-5">{t("footer.contact.title")}</h3>
             <ul className="space-y-2 mb-6">
               <li>
                 <a
                   href="mailto:contact@keprea.com"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
                   contact@keprea.com
                 </a>
               </li>
             </ul>
-            <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Informations légales</h3>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-[0.2em] mb-5">{t("footer.legal.title")}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/mentions-legales" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Mentions légales
+                <Link to="/mentions-legales" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.legal.notice")}
                 </Link>
               </li>
               <li>
-                <Link to="/politique-confidentialite" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Politique de confidentialité
+                <Link to="/politique-confidentialite" className="text-sm text-muted-foreground hover:text-primary transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  {t("footer.legal.privacy")}
                 </Link>
               </li>
             </ul>
@@ -84,10 +101,10 @@ const Footer = () => {
 
         <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {currentYear} Keprea. Tous droits réservés.
+            &copy; {currentYear} Keprea. {t("footer.copyright")}
           </p>
           <p className="text-xs text-muted-foreground">
-            Biosolutions naturelles pour l'agriculture de demain.
+            {t("footer.bottomTagline")}
           </p>
         </div>
       </div>

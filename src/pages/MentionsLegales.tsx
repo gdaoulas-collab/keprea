@@ -1,9 +1,25 @@
+import { Head } from "vite-react-ssg";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { breadcrumbJsonLd } from "@/lib/breadcrumb";
 
 const MentionsLegales = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Mentions Légales | Keprea</title>
+        <meta name="description" content="Mentions légales de Keprea (SAS) : éditeur du site, hébergeur, SIRET, siège social à Mâcon (71)." />
+        <link rel="canonical" href="https://www.keprea.com/mentions-legales" />
+        <meta property="og:url" content="https://www.keprea.com/mentions-legales" />
+        <meta property="og:title" content="Mentions Légales | Keprea" />
+        <meta name="twitter:title" content="Mentions Légales | Keprea" />
+        <meta property="og:description" content="Mentions légales de Keprea (SAS) : éditeur du site, hébergeur, SIRET, siège social à Mâcon (71)." />
+        <meta name="twitter:description" content="Mentions légales de Keprea (SAS) : éditeur du site, hébergeur, SIRET, siège social à Mâcon (71)." />
+        <script type="application/ld+json">{breadcrumbJsonLd([
+          { name: "Accueil", path: "/" },
+          { name: "Mentions légales", path: "/mentions-legales" },
+        ])}</script>
+      </Head>
       <Navigation />
       <main className="container mx-auto max-w-3xl px-4 py-32">
         <h1 className="text-3xl font-bold text-foreground mb-8">Mentions légales</h1>
@@ -15,7 +31,7 @@ const MentionsLegales = () => {
             Société par Actions Simplifiée (SAS)<br />
             Capital social : 1 472,23 €<br />
             SIRET : 931 810 535 00035<br />
-            Siège social : Dole (39100), Jura, France<br />
+            Siège social : 42 rue Tourneloup, 71000 Mâcon, France<br />
             Email : <a href="mailto:contact@keprea.com" className="text-primary hover:underline">contact@keprea.com</a>
           </p>
         </section>
@@ -23,7 +39,7 @@ const MentionsLegales = () => {
         <section className="mb-8">
           <h2 className="text-xl font-semibold text-foreground mb-3">Directeur de la publication</h2>
           <p className="text-muted-foreground leading-relaxed">
-            Mathieu Cournut — <a href="mailto:m.cournut@keprea.com" className="text-primary hover:underline">m.cournut@keprea.com</a>
+            Guillaume Daoulas, <a href="mailto:g.daoulas@keprea.com" className="text-primary hover:underline">g.daoulas@keprea.com</a>
           </p>
         </section>
 
@@ -31,7 +47,7 @@ const MentionsLegales = () => {
           <h2 className="text-xl font-semibold text-foreground mb-3">Hébergement</h2>
           <p className="text-muted-foreground leading-relaxed">
               <strong className="text-foreground">GoDaddy.com, LLC</strong><br />
-            100 S. Mill Ave, Suite 1600 — Tempe, Arizona 85281, États-Unis<br />
+            100 S. Mill Ave, Suite 1600, Tempe, Arizona 85281, États-Unis<br />
             <a href="https://www.godaddy.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">www.godaddy.com</a>
           </p>
         </section>

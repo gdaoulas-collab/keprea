@@ -1,32 +1,39 @@
-import { useState } from "react";
+import type { RefObject } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useInView } from "@/hooks/useInView";
 
 interface TeamMember {
-  id: number;
   name: string;
-  role: string;
-  x: number;
-  y: number;
+  roleKey: string;
 }
+
+const teamMembers: TeamMember[] = [
+  { name: "Alexandre Pernot", roleKey: "team.role.alexandre" },
+  { name: "Antoine Hubert", roleKey: "team.role.antoine" },
+  { name: "Béatrice Vassy", roleKey: "team.role.beatrice" },
+  { name: "Emilien Bohuon", roleKey: "team.role.emilien" },
+  { name: "Guillaume Daoulas", roleKey: "team.role.guillaume" },
+  { name: "Isabelle Couvert", roleKey: "team.role.isabelle" },
+  { name: "Julien Denormandie", roleKey: "team.role.julien" },
+  { name: "Pascal Maignet", roleKey: "team.role.pascal" },
+  { name: "Thibault Sarton du Jonchay", roleKey: "team.role.thibault" },
+  { name: "Thierry Dumbardon Martial", roleKey: "team.role.thierry" },
+];
+
+const getInitials = (name: string) => {
+  const parts = name.split(" ");
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
 
 const Team = () => {
   const { t } = useLanguage();
-  const [hoveredMember, setHoveredMember] = useState<number | null>(null);
-  
-  const teamMembers: TeamMember[] = [
-    { id: 1, name: "Emilien Bohuon", role: "Directeur R&D agronomique", x: 44, y: 35 },
-    { id: 2, name: "Pascal Maignet", role: "Directeur R&D biocontrole", x: 25, y: 82 },
-    { id: 3, name: "Antoine Hubert", role: "Président directeur général", x: 25, y: 45 },
-    { id: 4, name: "Julien Denormandie", role: "Président du conseil de surveillance", x: 32, y: 40 },
-    { id: 5, name: "Valentin Frenceshi", role: "Conducteur de ligne", x: 10, y: 70 },
-    { id: 6, name: "Antoine Lescouet", role: "Conducteur de ligne", x: 75, y: 75 },
-  ];
+  const { ref: teamRef, inView: teamVisible } = useInView(0.05);
 
   return (
-    <section className="py-16 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
+      <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
             {t('team.title')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -34,56 +41,23 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
-          {/* Photo d'équipe */}
-          <div className="relative overflow-hidden rounded-lg shadow-lg aspect-[16/10]">
-            <img 
-              src="/lovable-uploads/team-photo-new.jpg" 
-              alt="Équipe Keprea - Experts en agtech et biosolutions"
-              className="w-full h-full object-cover"
-            />
-            
-            {/* Texte overlay */}
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-background/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md border border-border">
-              <p className="text-sm font-medium text-foreground">
-                {t('team.photoNote')}
-              </p>
-            </div>
-
-            {/* Points interactifs pour chaque membre */}
-            {teamMembers.map((member) => (
-              <div
-                key={member.id}
-                className="absolute w-4 h-4 cursor-pointer"
-                style={{ left: `${member.x}%`, top: `${member.y}%` }}
-                onMouseEnter={() => setHoveredMember(member.id)}
-                onMouseLeave={() => setHoveredMember(null)}
-              >
-                {/* Point indicateur */}
-                <div className="w-4 h-4 bg-primary rounded-full border-2 border-white shadow-lg animate-pulse hover:scale-125 transition-transform"></div>
-                
-                {/* Tooltip avec nom et fonction */}
-                {hoveredMember === member.id && (
-                  <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-background border border-border rounded-lg px-3 py-2 shadow-lg z-10 whitespace-nowrap">
-                    <div className="text-sm font-medium text-foreground">
-                      {member.name}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {member.role}
-                    </div>
-                    {/* Flèche du tooltip */}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-border"></div>
-                  </div>
-                )}
+        <div ref={teamRef as RefObject<HTMLDivElement>} className={`max-w-4xl mx-auto grid grid-cols-2 gap-5 sm:grid-cols-4 sm:gap-6 reveal${teamVisible ? ' is-visible' : ''}`}>
+          {teamMembers.map((member) => (
+            <div key={member.name} className="group text-center">
+              <div className="relative aspect-square overflow-hidden rounded-2xl bg-primary/10 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.03] group-hover:-translate-y-0.5">
+                <div className="flex h-full w-full items-center justify-center text-2xl font-bold text-primary/60 sm:text-3xl">
+                  {getInitials(member.name)}
+                </div>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              {t('team.hover')}
-            </p>
-          </div>
+              <div className="mt-3">
+                <p className="text-sm font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
+                  {member.name}
+                </p>
+                <p className="text-xs text-muted-foreground">{t(member.roleKey)}</p>
+                <span className="mx-auto mt-1.5 block h-0.5 w-0 bg-primary transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:w-8" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

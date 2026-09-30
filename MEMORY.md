@@ -7,7 +7,7 @@
 
 ## Positionnement de Keprea
 
-- **Qui** : Startup agri-tech fondée en 2025, basée à Dole (Jura, 39)
+- **Qui** : Startup agri-tech fondée en 2024, basée à Dole (Jura, 39)
 - **Quoi** : Biosolutions à base d'insectes pour l'agriculture (biocontrôle)
 - **Gammes** : Bioprotection, Biopesticides, Boosters, Biofertilisant
 - **Cible principale** : Agriculteurs (grandes cultures, maraîchage), coopératives, distributeurs agricoles
@@ -44,8 +44,10 @@
 
 | Décision | Statut |
 |----------|--------|
-| Migration vers GitHub + Vercel | Planifiée (Phase 2) |
-| Architecture multi-pages (12 URLs cibles) | Validée |
+| Migration vers GitHub + Vercel | **Faite** — keprea.com sert le build Vercel (13/07/2026) |
+| Domaine canonique = www.keprea.com | **Décidé (22/07/2026, révise le choix apex du 13/07) + vérifié en prod (24/07/2026)** — apex et vercel.app redirigent tous deux vers www, 0 réf. vercel.app en prod |
+| Architecture multi-pages (12 URLs cibles) | **Implémentée (Phase 5.3)** |
+| Pré-rendu statique (option A : vite-react-ssg) | **Implémentée (Phase 5.2)** |
 | Suppression du badge Lovable | Corrigé (Phase 0) |
 | Ajout témoignages agriculteurs | Priorité absolue |
 | Page « Pourquoi le biocontrôle ? » | À créer (Phase 2) |
@@ -92,13 +94,12 @@
 
 - [ ] Témoignages agriculteurs (texte + photo, idéalement vidéo)
 - [ ] Fiches techniques PDF pour chaque gamme (téléchargeables)
-- [ ] Page « Pourquoi le biocontrôle ? » (argumentaire pédagogique)
-- [ ] Biographies équipe avec photos
-- [ ] Articles de blog SEO (cibler requêtes longue traîne agricoles)
+- [ ] Biographies équipe avec photos (voir aussi ERRORS.md : vérifier identité/consentement des personnes nommées)
+- [ ] Articles de blog SEO (cibler requêtes longue traîne agricoles) — `/ressources` actuellement vide et volontairement en `noindex` (depuis le 02/07/2026, cf. ERRORS.md) ; retirer le `noindex` (`src/pages/Ressources.tsx`) une fois un contenu réel ajouté
 - [ ] Logos et références clients/partenaires
 - [ ] Schéma de production responsive
-- [ ] Mentions légales (éditeur, hébergeur, SIRET, etc.)
-- [ ] Politique de confidentialité conforme RGPD
+- [ ] 5 pages/articles ciblage mots-clés (audit 30/07/2026, détail `keprea.com-audit/ACTION-PLAN.md` Phase 5) : « Biocontrôle vs pesticides chimiques » (comparatif, trou structurel le plus critique), « Biostimulant ou biofertilisant : quelle différence ? » (anti-cannibalisation Boosters/Biofertilisant), « Ecophyto 2030 et biocontrôle », 2 pages verticales par filière (grandes cultures / maraîchage)
+- [ ] Substituts E-E-A-T sans témoignage (rapide→lent) : auteur `Person`/agronome sur JSON-LD `/pourquoi-le-biocontrole` ; bloc sources/méthodologie répliqué sur les 4 pages produits ; phrase de crédibilité par fondateur dans `Team.tsx` ; FAQ `ExtraitsNaturels.tsx` densifiée
 
 ---
 
@@ -138,11 +139,11 @@
 
 ---
 
-## Historique des sessions
+## Historique des sessions (résumé)
 
-| Date | Décisions / apprentissages |
-|------|---------------------------|
-| Juin 2026 | Rapport stratégique complet produit. Initialisation du projet Claude Code. |
-| 15 juin 2026 | Phase 0 complétée : badge Lovable supprimé, emojis → icônes lucide, description dupliquée corrigée. Nouvelle erreur découverte : `lang="en"` dans `index.html`. |
-| 15 juin 2026 | Phase 1 Conformité complétée : `lang="fr"`, Footer, Mentions légales, Politique de confidentialité, CookieBanner, case RGPD formulaire. SIRET/capital/hébergeur restent à renseigner dans `MentionsLegales.tsx`. |
-| 15 juin 2026 | Phase 1 Conversion complétée : formulaire réduit à 5 champs (Prénom, Entreprise, Email, Message, RGPD), contraste CTA corrigé (primaire 37%→30% L, WCAG AA ≥ 4.5:1), poster ajouté sur 3 vidéos. |
+| Période | Décisions / apprentissages clés |
+|---------|----------------------------------|
+| Juin-03 juil. 2026 | Refonte complète (badge Lovable, RGPD, SSG, redesigns UX, noms produits ExtracBio/Fertea432/Boostea13/Soilea110) + audit SEO complet (score 53/100→corrigé) + batch pré-publication (claims non sourcés retirés, "Made in France" remplace Dole/Jura dans le contenu visible, adresse réelle conservée Footer/Mentions légales). Détails `ERRORS.md`. |
+| 06-07 juil. 2026 | Revue critique corrigée. `/contact` scindée en 2 onglets "Contact"/"Retour terrain" (`FieldFeedbackForm.tsx`). Retours "Relecture site web" appliqués (FR). Puis refonte visuelle homepage→site entier ("niveau Polyfly") : `PremiumCard.tsx`, rythme vertical harmonisé. Build 24 pages + lint OK. |
+| 30 juil. 2026 | Ré-audit ciblé (aucune régression depuis 22/07). Analyse SXO/cluster : trou structurel "alternative pesticides" (aucune page comparative), cannibalisation Boosters/Biofertilisant, 5 pages à créer + substituts E-E-A-T — détail `keprea.com-audit/ACTION-PLAN.md` Phase 5. |
+| 28 sept. 2026 | Audit sécurité formulaires (artifact publié) → corrections appliquées : CORS edge functions restreint à www.keprea.com, validation serveur + échappement HTML (`_shared/security.ts`), rate limiting (table `rate_limit_hits`, 3 req/10min/IP), honeypot anti-spam sur `ContactForm`/`FieldFeedbackForm`, CSP + HSTS ajoutés (`vercel.json`), `npm audit fix` (12/17 CVE corrigées, 5 restantes nécessitent breaking change vite/react-router — non appliqué), CI `dependency-audit.yml` (npm audit + Trivy). **CSP a cassé toute l'interactivité en prod (hydratation vite-react-ssg bloquée)** — corrigé le jour même, détail `ERRORS.md`. Bloc "Nos garanties" homepage signalé invisible (stats + cartes) — corrigé en rendant `useInView` résilient (repli si l'observateur ne se déclenche pas), même cause probable (hydratation SSG), détail `ERRORS.md`. |

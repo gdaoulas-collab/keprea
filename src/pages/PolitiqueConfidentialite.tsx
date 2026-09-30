@@ -1,9 +1,25 @@
+import { Head } from "vite-react-ssg";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { breadcrumbJsonLd } from "@/lib/breadcrumb";
 
 const PolitiqueConfidentialite = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Head>
+        <title>Politique de Confidentialité | Keprea</title>
+        <meta name="description" content="Politique de confidentialité Keprea : données collectées, finalités du traitement et droits RGPD des utilisateurs du site." />
+        <link rel="canonical" href="https://www.keprea.com/politique-confidentialite" />
+        <meta property="og:url" content="https://www.keprea.com/politique-confidentialite" />
+        <meta property="og:title" content="Politique de Confidentialité | Keprea" />
+        <meta name="twitter:title" content="Politique de Confidentialité | Keprea" />
+        <meta property="og:description" content="Politique de confidentialité Keprea : données collectées, finalités du traitement et droits RGPD des utilisateurs du site." />
+        <meta name="twitter:description" content="Politique de confidentialité Keprea : données collectées, finalités du traitement et droits RGPD des utilisateurs du site." />
+        <script type="application/ld+json">{breadcrumbJsonLd([
+          { name: "Accueil", path: "/" },
+          { name: "Politique de confidentialité", path: "/politique-confidentialite" },
+        ])}</script>
+      </Head>
       <Navigation />
       <main className="container mx-auto max-w-3xl px-4 py-32">
         <h1 className="text-3xl font-bold text-foreground mb-2">Politique de confidentialité</h1>
@@ -12,7 +28,7 @@ const PolitiqueConfidentialite = () => {
         <section className="mb-8">
           <h2 className="text-xl font-semibold text-foreground mb-3">Responsable du traitement</h2>
           <p className="text-muted-foreground leading-relaxed">
-            KEPREA — Dole (39100), France<br />
+            KEPREA, Dole (39100), France<br />
             Email : <a href="mailto:contact@keprea.com" className="text-primary hover:underline">contact@keprea.com</a>
           </p>
         </section>

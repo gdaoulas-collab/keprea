@@ -8,25 +8,25 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 142 69% 8%;
+    --background: 40 30% 99%;
+    --foreground: 142 15% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 142 69% 8%;
+    --card-foreground: 142 15% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 142 69% 8%;
+    --popover-foreground: 142 15% 10%;
 
-    --primary: 145 68% 30%;
+    --primary: 148 73% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 120 60% 95%;
-    --secondary-foreground: 142 69% 8%;
+    --secondary: 142 60% 95%;
+    --secondary-foreground: 142 15% 10%;
 
-    --muted: 120 60% 95%;
-    --muted-foreground: 142 20% 55%;
+    --muted: 142 60% 95%;
+    --muted-foreground: 142 8% 42%;
 
-    --accent: 145 68% 37%;
+    --accent: 148 73% 45%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -56,25 +56,25 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 142 69% 8%;
-    --foreground: 120 100% 98%;
+    --background: 142 15% 8%;
+    --foreground: 142 20% 97%;
 
-    --card: 142 50% 12%;
-    --card-foreground: 120 100% 98%;
+    --card: 142 15% 12%;
+    --card-foreground: 142 20% 97%;
 
-    --popover: 142 50% 12%;
-    --popover-foreground: 120 100% 98%;
+    --popover: 142 15% 12%;
+    --popover-foreground: 142 20% 97%;
 
-    --primary: 145 68% 37%;
+    --primary: 148 73% 52%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 142 30% 25%;
-    --secondary-foreground: 120 100% 98%;
+    --secondary-foreground: 142 20% 97%;
 
     --muted: 142 30% 25%;
-    --muted-foreground: 120 20% 75%;
+    --muted-foreground: 142 10% 72%;
 
-    --accent: 145 68% 37%;
+    --accent: 148 73% 52%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
@@ -95,207 +95,106 @@ All colors MUST be HSL.
 }
 
 @layer base {
+  :root {
+    --warm: 38 68% 48%;
+    --warm-foreground: 0 0% 100%;
+    --warm-subtle: 38 40% 96%;
+  }
+}
+
+@layer base {
+  :root {
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: 'Poppins', sans-serif;
   }
-}
 
-/* Custom animations */
-@keyframes gentle-zoom {
-  0%, 100% { 
-    transform: scale(1); 
+  /* Grain overlay — fixed, pointer-events-none, never on scrolling containers */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9800;
+    pointer-events: none;
+    opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
   }
-  50% { 
-    transform: scale(1.05); 
-  }
-}
 
-@keyframes float {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
+  h1, h2, h3 {
+    text-wrap: balance;
+    letter-spacing: -0.025em;
+    font-family: 'Outfit', 'Poppins', sans-serif;
   }
-  50% { 
-    transform: translateY(-10px) rotate(180deg); 
-  }
-}
 
-@keyframes drift {
-  0% { 
-    transform: translateX(-50px) translateY(0px); 
-    opacity: 0;
-  }
-  50% { 
-    opacity: 1;
-  }
-  100% { 
-    transform: translateX(50px) translateY(-20px); 
-    opacity: 0;
+  button:active,
+  [role="button"]:active {
+    transform: scale(0.97);
   }
 }
 
-@keyframes sparkle {
-  0%, 100% { 
-    opacity: 0;
-    transform: scale(0);
-  }
-  50% { 
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes sway {
-  0%, 100% { 
-    transform: scale(1.02) translateX(0px) rotate(0deg);
-  }
-  25% { 
-    transform: scale(1.03) translateX(-2px) rotate(-0.5deg);
-  }
-  75% { 
-    transform: scale(1.03) translateX(2px) rotate(0.5deg);
-  }
-}
-
-@keyframes pan-up {
-  0% { 
-    transform: scale(1.05) translateY(10px);
-  }
-  25% { 
-    transform: scale(1.06) translateY(5px);
-  }
-  50% { 
-    transform: scale(1.05) translateY(0px);
-  }
-  75% { 
-    transform: scale(1.06) translateY(-5px);
-  }
-  100% { 
-    transform: scale(1.05) translateY(-10px);
-  }
-}
-
-@keyframes slow-zoom {
-  0% { 
-    transform: scale(1);
-    filter: brightness(1) contrast(1);
-  }
-  50% { 
-    transform: scale(1.1);
-    filter: brightness(1.05) contrast(1.1);
-  }
-  100% { 
-    transform: scale(1);
-    filter: brightness(1) contrast(1);
-  }
-}
-
-@keyframes water-drop {
-  0% { 
-    transform: translateY(-20px) scaleY(1);
-    opacity: 0;
-  }
-  10% { 
-    opacity: 1;
-    transform: translateY(0px) scaleY(1.2);
-  }
-  90% { 
-    opacity: 1;
-    transform: translateY(100vh) scaleY(1.5);
-  }
-  100% { 
-    opacity: 0;
-    transform: translateY(100vh) scaleY(1.5);
-  }
-}
-
-@keyframes ripple {
-  0% { 
-    transform: scale(0);
-    opacity: 0.8;
-  }
-  50% { 
-    transform: scale(1.5);
-    opacity: 0.4;
-  }
-  100% { 
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-@keyframes pan-left {
-  0% { 
-    transform: translateX(0%) scale(1.1);
-  }
-  100% { 
-    transform: translateX(-5%) scale(1.1);
-  }
-}
-
-@keyframes pan-right {
-  0% { 
-    transform: translateX(-5%) scale(1.1);
-  }
-  100% { 
-    transform: translateX(0%) scale(1.1);
-  }
-}
-
-@keyframes slow-pan-left {
-  0% { 
-    transform: translateX(0%) scale(1.05);
-  }
-  100% { 
-    transform: translateX(-3%) scale(1.05);
-  }
-}
-
-@keyframes slow-pan-right {
-  0% { 
-    transform: translateX(-3%) scale(1.05);
-  }
-  100% { 
-    transform: translateX(0%) scale(1.05);
-  }
-}
-
-@keyframes camera-sweep {
-  0% { 
-    transform: translateX(2%) scale(1.08);
-  }
-  50% { 
-    transform: translateX(-2%) scale(1.08);
-  }
-  100% { 
-    transform: translateX(2%) scale(1.08);
-  }
-}
-
-/* 3D Flip Animation Classes */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
 
 /* Hide Lovable badge */
 #lovable-badge,
 [data-lovable-badge],
 .lovable-badge {
   display: none !important;
+}
+
+/* Scroll-reveal — heavy fade-up with blur, resolves via IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(6px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+/* Ken Burns — slow zoom + subtle pan, GPU-safe (transform only) */
+@keyframes ken-burns {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.09) translate(-1.5%, -1%); }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 14s ease-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ken-burns {
+    animation: none;
+  }
 }

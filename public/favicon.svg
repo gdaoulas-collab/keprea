@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Leaf/teardrop outline: tip upper-right, large arc going left/down/right -->
+  <path
+    d="M 73 19 L 77 33 A 38 38 0 1 1 63 15 Z"
+    fill="none"
+    stroke="#3DC35A"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- K vertical bar -->
+  <rect x="22" y="20" width="9" height="60" rx="3.5" fill="#3DC35A"/>
+  <!-- K upper arm -->
+  <line x1="31" y1="50" x2="59" y2="20" stroke="#3DC35A" stroke-width="8.5" stroke-linecap="round"/>
+  <!-- K lower arm -->
+  <line x1="31" y1="50" x2="59" y2="80" stroke="#3DC35A" stroke-width="8.5" stroke-linecap="round"/>
+</svg>

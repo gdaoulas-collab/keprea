@@ -25,7 +25,9 @@ const LanguageSelector = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-primary transition-colors bg-background/50 backdrop-blur-sm rounded-lg border border-border/50 hover:border-primary/20"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-primary transition-colors bg-background/50 backdrop-blur-sm rounded-lg border border-border/50 hover:border-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         <span className="text-xl">{currentLanguage?.flag}</span>
         <ChevronDown className="w-4 h-4" />
@@ -45,7 +47,7 @@ const LanguageSelector = () => {
               <button
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted/50 transition-colors ${
+                className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset ${
                   language === lang.code ? 'bg-primary/10 text-primary' : 'text-foreground'
                 }`}
               >

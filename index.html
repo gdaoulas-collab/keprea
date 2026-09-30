@@ -3,22 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Keprea - Biosolutions Agricoles Innovantes</title>
-    <meta name="description" content="Keprea développe des biosolutions révolutionnaires à base d&#39;insectes pour l&#39;agriculture : fertilisation, boosters et protection naturelle des cultures.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Pas de <title>/<meta name="description"> ici : chaque page les définit via son composant <Head> (vite-react-ssg).
+         Les laisser ici dupliquait ces balises sur les 18 pages du build SSG (audit SEO 02/07/2026). -->
 
-
+    <!-- og:title/og:description/twitter:title/twitter:description définis par page (voir <Head> de chaque page) —
+         les laisser ici en plus dupliquait ces balises sur les 18 pages (même bug que le <title>, audit SEO 02/07/2026).
+         og:image/twitter:image restent ici en valeur par défaut partagée : pas d'image sociale dédiée par page pour l'instant. -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/n2BfGnJy0AUCkzlq0EQExcigyOi2/social-images/social-1771231749213-eprea_Main_Logo.webp">
+    <meta property="og:image" content="https://www.keprea.com/lovable-uploads/eprea_Main_Logo_800x600.jpg">
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/n2BfGnJy0AUCkzlq0EQExcigyOi2/social-images/social-1771231749213-eprea_Main_Logo.webp">
-    <meta property="og:title" content="Keprea - Biosolutions Agricoles Innovantes">
-  <meta name="twitter:title" content="Keprea - Biosolutions Agricoles Innovantes">
-  <meta property="og:description" content="Keprea développe des biosolutions révolutionnaires à base d&#39;insectes pour l&#39;agriculture : fertilisation, boosters et protection naturelle des cultures.">
-  <meta name="twitter:description" content="Keprea développe des biosolutions révolutionnaires à base d&#39;insectes pour l&#39;agriculture : fertilisation, boosters et protection naturelle des cultures.">
+    <meta name="twitter:image" content="https://www.keprea.com/lovable-uploads/eprea_Main_Logo_800x600.jpg">
+  <!-- Bascule domaine effectuée (13/07/2026, ajustée le 22/07/2026) : url/logo/images/canonical alignés sur https://www.keprea.com (domaine définitif, l'apex keprea.com redirige en 308 vers www). -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.keprea.com/#organization",
+    "name": "Keprea",
+    "url": "https://www.keprea.com",
+    "logo": "https://www.keprea.com/logo-keprea.png",
+    "description": "Keprea développe des biosolutions à base d'insectes pour l'agriculture durable.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dole",
+      "addressRegion": "Jura",
+      "postalCode": "39100",
+      "addressCountry": "FR"
+    }
+  }
+  </script>
 </head>
 
   <body>

@@ -1,0 +1,376 @@
+<title>Audit Sécurité Keprea</title>
+<style>
+  :root{
+    --bg:#f6f7f4;
+    --surface:#ffffff;
+    --surface-2:#eef1ea;
+    --border:#d9ddd2;
+    --text:#1b211c;
+    --text-muted:#5c6a5c;
+    --accent:#3f7a5c;
+    --accent-soft:#e4ede6;
+    --ok:#3f7a5c;
+    --ok-soft:#e4ede6;
+    --warn:#a9762b;
+    --warn-soft:#f5ead4;
+    --crit:#a8453a;
+    --crit-soft:#f6e2df;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+    --sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg:#12140f;
+      --surface:#191c15;
+      --surface-2:#1f2318;
+      --border:#33392a;
+      --text:#e9ece2;
+      --text-muted:#9aa48f;
+      --accent:#7cc99f;
+      --accent-soft:#20301f;
+      --ok:#7cc99f;
+      --ok-soft:#1e2e1f;
+      --warn:#e0b158;
+      --warn-soft:#332811;
+      --crit:#e28277;
+      --crit-soft:#331e1a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#12140f;
+    --surface:#191c15;
+    --surface-2:#1f2318;
+    --border:#33392a;
+    --text:#e9ece2;
+    --text-muted:#9aa48f;
+    --accent:#7cc99f;
+    --accent-soft:#20301f;
+    --ok:#7cc99f;
+    --ok-soft:#1e2e1f;
+    --warn:#e0b158;
+    --warn-soft:#332811;
+    --crit:#e28277;
+    --crit-soft:#331e1a;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    margin:0;
+    padding:0 20px 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:840px; margin:0 auto; }
+
+  header{
+    padding:56px 0 32px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:40px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(28px,4vw,38px);
+    line-height:1.15;
+    margin:0 0 14px;
+    text-wrap:balance;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    font-size:16px;
+    color:var(--text-muted);
+    max-width:60ch;
+    line-height:1.6;
+    margin:0;
+  }
+
+  .scoreboard{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    margin:28px 0 8px;
+  }
+  .score-cell{
+    background:var(--surface);
+    padding:18px 20px;
+  }
+  .score-num{
+    font-family:var(--mono);
+    font-size:26px;
+    font-variant-numeric:tabular-nums;
+    line-height:1;
+  }
+  .score-label{
+    font-size:12px;
+    color:var(--text-muted);
+    margin-top:6px;
+  }
+  .score-cell.ok .score-num{ color:var(--ok); }
+  .score-cell.crit .score-num{ color:var(--crit); }
+
+  section{ margin-bottom:44px; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:16px;
+  }
+  .section-head h2{
+    font-size:13px;
+    font-family:var(--mono);
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    margin:0;
+    color:var(--text-muted);
+  }
+  .section-head .count{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--text-muted);
+  }
+  .section-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+
+  .item{
+    display:grid;
+    grid-template-columns:22px 1fr;
+    gap:14px;
+    padding:16px 18px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:10px;
+  }
+  .item.priority{
+    border-left:3px solid var(--crit);
+  }
+  .item.recommended{
+    border-left:3px solid var(--warn);
+  }
+  .item.done{
+    border-left:3px solid var(--ok);
+  }
+  .mark{
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.6;
+    text-align:center;
+  }
+  .item.priority .mark{ color:var(--crit); }
+  .item.recommended .mark{ color:var(--warn); }
+  .item.done .mark{ color:var(--ok); }
+
+  .item-title{
+    font-weight:600;
+    font-size:15px;
+    margin:0 0 4px;
+  }
+  .item-body{
+    font-size:13.5px;
+    color:var(--text-muted);
+    line-height:1.55;
+    margin:0;
+  }
+  .item-body code{
+    font-family:var(--mono);
+    font-size:12.5px;
+    background:var(--surface-2);
+    padding:1px 5px;
+    border-radius:4px;
+    color:var(--text);
+  }
+  .tag{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:2px 7px;
+    border-radius:5px;
+    margin-left:8px;
+    position:relative;
+    top:-1px;
+  }
+  .tag.crit{ background:var(--crit-soft); color:var(--crit); }
+  .tag.warn{ background:var(--warn-soft); color:var(--warn); }
+
+  .done-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  @media (max-width:600px){ .done-grid{ grid-template-columns:1fr; } .scoreboard{grid-template-columns:1fr;} }
+  .done-item{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    padding:10px 12px;
+    font-size:13px;
+    color:var(--text-muted);
+    background:var(--surface-2);
+    border-radius:8px;
+  }
+  .done-item .mark{ font-size:12px; padding-top:1px; }
+  .done-item b{ color:var(--text); font-weight:600; }
+
+  footer{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    font-size:12px;
+    font-family:var(--mono);
+    color:var(--text-muted);
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Keprea — www.keprea.com</p>
+    <h1>Audit sécurité, indexation &amp; UX</h1>
+    <p class="lede">Sélection des points de ta liste qui ne sont pas encore en place et qui ont un intérêt réel pour le site — établie par inspection directe du repo (vercel.json, edge functions Supabase, migrations SQL, dépendances npm).</p>
+    <div class="scoreboard">
+      <div class="score-cell ok">
+        <div class="score-num">10</div>
+        <div class="score-label">déjà en place</div>
+      </div>
+      <div class="score-cell crit">
+        <div class="score-num">5</div>
+        <div class="score-label">prioritaires</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-num">6</div>
+        <div class="score-label">recommandés</div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head"><h2>À traiter en priorité</h2><span class="count">05</span></div>
+
+    <div class="item priority">
+      <span class="mark">01</span>
+      <div>
+        <p class="item-title">CORS grand ouvert sur les edge functions <span class="tag crit">sécurité</span></p>
+        <p class="item-body">Dans <code>send-contact-email</code> et <code>send-field-feedback-email</code>, <code>Access-Control-Allow-Origin: "*"</code> autorise n'importe quel site tiers à appeler ta fonction (spam, abus de ton quota Resend). À restreindre à <code>https://www.keprea.com</code>.</p>
+      </div>
+    </div>
+
+    <div class="item priority">
+      <span class="mark">02</span>
+      <div>
+        <p class="item-title">Validation serveur des entrées <span class="tag crit">sécurité</span></p>
+        <p class="item-body">Les edge functions insèrent et renvoient <code>formData</code> tel quel : pas de vérification de format email, pas de limite de longueur, et le message est injecté brut dans le HTML de l'e-mail (<code>${formData.message}</code>) — un input malveillant peut casser la mise en forme du mail ou tenter une injection HTML côté client mail.</p>
+      </div>
+    </div>
+
+    <div class="item priority">
+      <span class="mark">03</span>
+      <div>
+        <p class="item-title">Rate limiting absent <span class="tag crit">sécurité</span></p>
+        <p class="item-body">Aucune limite d'appels sur les deux fonctions Supabase : un script peut spammer le formulaire de contact et l'API Resend sans friction.</p>
+      </div>
+    </div>
+
+    <div class="item priority">
+      <span class="mark">04</span>
+      <div>
+        <p class="item-title">Aucune protection anti-spam sur les formulaires <span class="tag crit">sécurité</span></p>
+        <p class="item-body"><code>ContactForm</code> et <code>FieldFeedbackForm</code> n'ont ni honeypot ni captcha. Combiné à l'absence de rate limiting, c'est la porte ouverte aux bots.</p>
+      </div>
+    </div>
+
+    <div class="item priority">
+      <span class="mark">05</span>
+      <div>
+        <p class="item-title">Dépendances non scannées — 13 CVE haute sévérité <span class="tag crit">sécurité</span></p>
+        <p class="item-body"><code>npm audit</code> remonte 17 vulnérabilités (13 high) sur rollup, ws, postcss, yaml — et aucun CI n'existe pour les surveiller en continu. Un scan automatisé (Trivy ou simplement <code>npm audit</code> en CI) est le minimum utile ici, avant même Semgrep/Gitleaks/Nuclei.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Recommandés</h2><span class="count">06</span></div>
+
+    <div class="item recommended">
+      <span class="mark">·</span>
+      <div>
+        <p class="item-title">CSP + en-têtes de sécurité complémentaires</p>
+        <p class="item-body"><code>vercel.json</code> pose déjà X-Content-Type-Options, X-Frame-Options, Referrer-Policy et Permissions-Policy — solide base. Il manque une <code>Content-Security-Policy</code> et un <code>Strict-Transport-Security</code> explicite.</p>
+      </div>
+    </div>
+
+    <div class="item recommended">
+      <span class="mark">·</span>
+      <div>
+        <p class="item-title">Scan du code — Semgrep</p>
+        <p class="item-body">Utile pour détecter en continu ce type de faille (injection HTML dans l'e-mail, CORS ouvert) avant qu'elle n'atteigne la prod.</p>
+      </div>
+    </div>
+
+    <div class="item recommended">
+      <span class="mark">·</span>
+      <div>
+        <p class="item-title">Détection de secrets — Gitleaks</p>
+        <p class="item-body">Le <code>.env</code> est bien ignoré par git aujourd'hui, mais rien n'empêche un futur commit accidentel. Un hook/CI Gitleaks sécurise ça durablement.</p>
+      </div>
+    </div>
+
+    <div class="item recommended">
+      <span class="mark">·</span>
+      <div>
+        <p class="item-title">Scan du site déployé — Nuclei/ZAP</p>
+        <p class="item-body">Complément externe utile une fois les points ci-dessus traités, pour vérifier en conditions réelles (headers, endpoints exposés).</p>
+      </div>
+    </div>
+
+    <div class="item recommended">
+      <span class="mark">·</span>
+      <div>
+        <p class="item-title">Images en WebP/AVIF</p>
+        <p class="item-body">38 des 39 images de <code>public/lovable-uploads</code> sont en PNG — un seul fichier est en WebP. Conversion directement utile pour les Core Web Vitals et le SEO images.</p>
+      </div>
+    </div>
+
+    <div class="item recommended">
+      <span class="mark">·</span>
+      <div>
+        <p class="item-title">404, liens cassés et formulaires testés</p>
+        <p class="item-body">Aucune preuve de test automatisé (pas de CI). Un check de liens cassés + un passage manuel sur les deux formulaires avant la prochaine mise en prod reste pertinent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Déjà en place — écarté de la liste</h2><span class="count">10</span></div>
+    <div class="done-grid">
+      <div class="done-item"><span class="mark">✓</span><div><b>HTTPS partout</b> — apex redirige en 308 vers www, domaine canonique aligné.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>Pas de secret sensible en frontend</b> — seule la clé anon Supabase (publique par nature) est exposée.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>Variables d'environnement</b> — <code>.env</code> correctement ignoré par git.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>RGPD + politique de confidentialité</b> — page dédiée, case non pré-cochée.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>Cookies gérés</b> — bandeau opt-in, GA4 chargé seulement après consentement.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>Meta titles + descriptions</b> — définis par page via <code>&lt;Head&gt;</code>.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>Open Graph</b> — og:type/image en place, titres/descriptions par page.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>Sitemap + robots.txt</b> — présents et corrects.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>Alt sur les images</b> — toutes les balises <code>&lt;img&gt;</code> du repo en ont un.</div></div>
+      <div class="done-item"><span class="mark">✓</span><div><b>RLS Supabase</b> — table <code>contact_submissions</code> : insert public, lecture verrouillée.</div></div>
+    </div>
+  </section>
+
+  <footer>audit réalisé par inspection directe du repo — 2026-09-28</footer>
+</div>

@@ -1,0 +1,648 @@
+{
+  "home": {
+    "desktop": {
+      "url": "https://keprea.vercel.app/",
+      "scroll_width": 1440,
+      "client_width": 1440,
+      "body_scroll_width": 1440,
+      "horizontal_scroll_risk": false,
+      "h1s": [
+        "La nature au service de vos cultures"
+      ],
+      "cta_candidates": [
+        {
+          "text": "",
+          "tag": "A",
+          "width": 101,
+          "height": 36,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 22
+        },
+        {
+          "text": "Solutions",
+          "tag": "A",
+          "width": 65,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Innovation",
+          "tag": "A",
+          "width": 75,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Production",
+          "tag": "A",
+          "width": 77,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "À propos",
+          "tag": "A",
+          "width": 63,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Ressources",
+          "tag": "A",
+          "width": 80,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "🇫🇷",
+          "tag": "BUTTON",
+          "width": 67,
+          "height": 46,
+          "bg": "rgba(253, 253, 252, 0.5)",
+          "color": "rgb(117, 163, 134)",
+          "top": 17
+        },
+        {
+          "text": "Nous contacter",
+          "tag": "BUTTON",
+          "width": 126,
+          "height": 32,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 24
+        },
+        {
+          "text": "Voir nos solutions",
+          "tag": "BUTTON",
+          "width": 202,
+          "height": 48,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 639
+        },
+        {
+          "text": "Demander un essai",
+          "tag": "A",
+          "width": 179,
+          "height": 42,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "top": 642
+        },
+        {
+          "text": "En savoir plus",
+          "tag": "A",
+          "width": 1139,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 844
+        },
+        {
+          "text": "Refuser",
+          "tag": "BUTTON",
+          "width": 79,
+          "height": 36,
+          "bg": "rgb(253, 253, 252)",
+          "color": "rgb(6, 34, 17)",
+          "top": 846
+        },
+        {
+          "text": "Accepter",
+          "tag": "BUTTON",
+          "width": 88,
+          "height": 36,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 846
+        }
+      ],
+      "video_count": 1,
+      "video_posters": [
+        "/lovable-uploads/hero-poster-frame.jpg"
+      ],
+      "console_errors": [],
+      "emojis_found": []
+    },
+    "mobile": {
+      "url": "https://keprea.vercel.app/",
+      "scroll_width": 375,
+      "client_width": 375,
+      "body_scroll_width": 375,
+      "horizontal_scroll_risk": false,
+      "h1s": [
+        "La nature au service de vos cultures"
+      ],
+      "cta_candidates": [
+        {
+          "text": "",
+          "tag": "A",
+          "width": 112,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 12
+        },
+        {
+          "text": "🇫🇷",
+          "tag": "BUTTON",
+          "width": 67,
+          "height": 46,
+          "bg": "rgba(253, 253, 252, 0.5)",
+          "color": "rgb(117, 163, 134)",
+          "top": 9
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 36,
+          "height": 36,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 14
+        },
+        {
+          "text": "Voir nos solutions",
+          "tag": "BUTTON",
+          "width": 202,
+          "height": 48,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 468
+        },
+        {
+          "text": "Demander un essai",
+          "tag": "A",
+          "width": 179,
+          "height": 42,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "top": 528
+        },
+        {
+          "text": "En savoir plus",
+          "tag": "A",
+          "width": 95,
+          "height": 20,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 724
+        },
+        {
+          "text": "Refuser",
+          "tag": "BUTTON",
+          "width": 79,
+          "height": 36,
+          "bg": "rgb(253, 253, 252)",
+          "color": "rgb(6, 34, 17)",
+          "top": 760
+        },
+        {
+          "text": "Accepter",
+          "tag": "BUTTON",
+          "width": 88,
+          "height": 36,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 760
+        }
+      ],
+      "video_count": 1,
+      "video_posters": [
+        "/lovable-uploads/hero-poster-frame.jpg"
+      ],
+      "console_errors": [],
+      "emojis_found": []
+    }
+  },
+  "product": {
+    "desktop": {
+      "url": "https://keprea.vercel.app/solutions/bioprotection",
+      "scroll_width": 1440,
+      "client_width": 1440,
+      "body_scroll_width": 1440,
+      "horizontal_scroll_risk": false,
+      "h1s": [
+        "Bioprotection"
+      ],
+      "cta_candidates": [
+        {
+          "text": "",
+          "tag": "A",
+          "width": 101,
+          "height": 36,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 22
+        },
+        {
+          "text": "Solutions",
+          "tag": "A",
+          "width": 66,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 29
+        },
+        {
+          "text": "Innovation",
+          "tag": "A",
+          "width": 75,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Production",
+          "tag": "A",
+          "width": 77,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "À propos",
+          "tag": "A",
+          "width": 63,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Ressources",
+          "tag": "A",
+          "width": 80,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "🇫🇷",
+          "tag": "BUTTON",
+          "width": 67,
+          "height": 46,
+          "bg": "rgba(253, 253, 252, 0.5)",
+          "color": "rgb(117, 163, 134)",
+          "top": 17
+        },
+        {
+          "text": "Nous contacter",
+          "tag": "BUTTON",
+          "width": 126,
+          "height": 32,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 24
+        },
+        {
+          "text": "Retour aux biosolutions",
+          "tag": "A",
+          "width": 229,
+          "height": 23,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 171
+        },
+        {
+          "text": "Retour aux biosolutions",
+          "tag": "BUTTON",
+          "width": 229,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "top": 160
+        },
+        {
+          "text": "En savoir plus",
+          "tag": "A",
+          "width": 1139,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 844
+        },
+        {
+          "text": "Refuser",
+          "tag": "BUTTON",
+          "width": 79,
+          "height": 36,
+          "bg": "rgb(253, 253, 252)",
+          "color": "rgb(6, 34, 17)",
+          "top": 846
+        },
+        {
+          "text": "Accepter",
+          "tag": "BUTTON",
+          "width": 88,
+          "height": 36,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 846
+        }
+      ],
+      "video_count": 0,
+      "video_posters": [],
+      "console_errors": [],
+      "emojis_found": []
+    },
+    "mobile": {
+      "url": "https://keprea.vercel.app/solutions/bioprotection",
+      "scroll_width": 375,
+      "client_width": 375,
+      "body_scroll_width": 375,
+      "horizontal_scroll_risk": false,
+      "h1s": [
+        "Bioprotection"
+      ],
+      "cta_candidates": [
+        {
+          "text": "",
+          "tag": "A",
+          "width": 112,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 12
+        },
+        {
+          "text": "🇫🇷",
+          "tag": "BUTTON",
+          "width": 67,
+          "height": 46,
+          "bg": "rgba(253, 253, 252, 0.5)",
+          "color": "rgb(117, 163, 134)",
+          "top": 9
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 36,
+          "height": 36,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 14
+        },
+        {
+          "text": "Retour aux biosolutions",
+          "tag": "A",
+          "width": 229,
+          "height": 23,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 171
+        },
+        {
+          "text": "Retour aux biosolutions",
+          "tag": "BUTTON",
+          "width": 229,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "top": 160
+        },
+        {
+          "text": "En savoir plus",
+          "tag": "A",
+          "width": 95,
+          "height": 20,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 724
+        },
+        {
+          "text": "Refuser",
+          "tag": "BUTTON",
+          "width": 79,
+          "height": 36,
+          "bg": "rgb(253, 253, 252)",
+          "color": "rgb(6, 34, 17)",
+          "top": 760
+        },
+        {
+          "text": "Accepter",
+          "tag": "BUTTON",
+          "width": 88,
+          "height": 36,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 760
+        }
+      ],
+      "video_count": 0,
+      "video_posters": [],
+      "console_errors": [],
+      "emojis_found": []
+    }
+  },
+  "contact": {
+    "desktop": {
+      "url": "https://keprea.vercel.app/contact",
+      "scroll_width": 1440,
+      "client_width": 1440,
+      "body_scroll_width": 1440,
+      "horizontal_scroll_risk": false,
+      "h1s": [
+        "Parlons de votre projet"
+      ],
+      "cta_candidates": [
+        {
+          "text": "",
+          "tag": "A",
+          "width": 101,
+          "height": 36,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 22
+        },
+        {
+          "text": "Solutions",
+          "tag": "A",
+          "width": 65,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Innovation",
+          "tag": "A",
+          "width": 75,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Production",
+          "tag": "A",
+          "width": 77,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "À propos",
+          "tag": "A",
+          "width": 63,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "Ressources",
+          "tag": "A",
+          "width": 80,
+          "height": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgba(6, 34, 17, 0.65)",
+          "top": 29
+        },
+        {
+          "text": "🇫🇷",
+          "tag": "BUTTON",
+          "width": 67,
+          "height": 46,
+          "bg": "rgba(253, 253, 252, 0.5)",
+          "color": "rgb(117, 163, 134)",
+          "top": 17
+        },
+        {
+          "text": "Nous contacter",
+          "tag": "BUTTON",
+          "width": 126,
+          "height": 32,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 24
+        },
+        {
+          "text": "contact@keprea.com",
+          "tag": "A",
+          "width": 152,
+          "height": 20,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 597
+        },
+        {
+          "text": "En savoir plus",
+          "tag": "A",
+          "width": 1139,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 844
+        },
+        {
+          "text": "Refuser",
+          "tag": "BUTTON",
+          "width": 79,
+          "height": 36,
+          "bg": "rgb(253, 253, 252)",
+          "color": "rgb(6, 34, 17)",
+          "top": 846
+        },
+        {
+          "text": "Accepter",
+          "tag": "BUTTON",
+          "width": 88,
+          "height": 36,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 846
+        }
+      ],
+      "video_count": 0,
+      "video_posters": [],
+      "console_errors": [],
+      "emojis_found": []
+    },
+    "mobile": {
+      "url": "https://keprea.vercel.app/contact",
+      "scroll_width": 375,
+      "client_width": 375,
+      "body_scroll_width": 375,
+      "horizontal_scroll_risk": false,
+      "h1s": [
+        "Parlons de votre projet"
+      ],
+      "cta_candidates": [
+        {
+          "text": "",
+          "tag": "A",
+          "width": 112,
+          "height": 40,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(6, 34, 17)",
+          "top": 12
+        },
+        {
+          "text": "🇫🇷",
+          "tag": "BUTTON",
+          "width": 67,
+          "height": 46,
+          "bg": "rgba(253, 253, 252, 0.5)",
+          "color": "rgb(117, 163, 134)",
+          "top": 9
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 36,
+          "height": 36,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 14
+        },
+        {
+          "text": "En savoir plus",
+          "tag": "A",
+          "width": 95,
+          "height": 20,
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(24, 129, 68)",
+          "top": 724
+        },
+        {
+          "text": "Refuser",
+          "tag": "BUTTON",
+          "width": 79,
+          "height": 36,
+          "bg": "rgb(253, 253, 252)",
+          "color": "rgb(6, 34, 17)",
+          "top": 760
+        },
+        {
+          "text": "Accepter",
+          "tag": "BUTTON",
+          "width": 88,
+          "height": 36,
+          "bg": "rgb(24, 129, 68)",
+          "color": "rgb(255, 255, 255)",
+          "top": 760
+        }
+      ],
+      "video_count": 0,
+      "video_posters": [],
+      "console_errors": [],
+      "emojis_found": []
+    }
+  }
+}
